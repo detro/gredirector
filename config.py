@@ -8,6 +8,7 @@ DEFAULT_URL = 'http://www.ivandemarino.me/'
 URLS = {
    '%s.appspot.com' % (os.environ['APPLICATION_ID']) : ('blog.ivandemarino.me', False),
    'redirector.ivandemarino.me' : ('blog.ivandemarino.me', False),
+   'detronizator.org': ('blog.ivandemarino.me', False),
 	'www.detronizator.org': ('blog.ivandemarino.me', False),
 	'downloads.detronizator.org': ('www.ivandemarino.me', True),
 };
