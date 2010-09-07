@@ -4,9 +4,10 @@ import logging
 # Default URL: if no Redirect URL can be generated, traffic will be diverted here
 DEFAULT_URL = 'http://www.ivandemarino.me/'
 
-# Old Domain: New Domain, Map urls (redirect to Root ('domain/'))
+# Old Domain: New Domain, Map urls (redirect to Root ('mydomain.com/'))
 URLS = {
    '%s.appspot.com' % (os.environ['APPLICATION_ID']) : ('blog.ivandemarino.me', False),
+   'redirector.ivandemarino.me' : ('blog.ivandemarino.me', False),
 	'www.detronizator.org': ('blog.ivandemarino.me', False),
 	'downloads.detronizator.org': ('www.ivandemarino.me', True),
 };
