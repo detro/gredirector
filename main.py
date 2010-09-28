@@ -1,4 +1,4 @@
-# App Name: Redirector
+# App Name: Gredirector
 # Author: Ivan De Marino - ivan.de.marino@gmail.com
 # Forked from: http://blog.dantup.com/2010/01/generic-redirection-script-for-google-app-engine
 
@@ -97,11 +97,12 @@ class MainHandler(webapp.RequestHandler):
       else:
          # Log that we didn't know what this was, and redirect to a good default
          logging.error("Unable to Redirect URL '%s'" % (self.request.url) );
-         mail.send_mail_to_admins(
-            sender=config.ERROR_EMAIL_SENDER,
-            subject=config.ERROR_EMAIL_SUBJECT,
-            body=config.ERROR_EMAIL_BODY + self.request.url
-         );
+         if config.ERROR_EMAIL_ACTIVE:
+            mail.send_mail_to_admins(
+               sender=config.ERROR_EMAIL_SENDER,
+               subject=config.ERROR_EMAIL_SUBJECT,
+               body=config.ERROR_EMAIL_BODY + self.request.url
+            );
          self.redirect(config.DEFAULT_URL, permanent=True);
 
 
