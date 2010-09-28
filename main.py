@@ -91,7 +91,7 @@ class MainHandler(webapp.RequestHandler):
       url = get_redirect_url(self.request.url);
 
       # Check that we were able to build a URL and that this URL actually exists
-      if url and check_url_exists(url):
+      if url and (check_url_exists(url) if config.CHECK_URL_EXISTANCE else True):
          logging.info("Redirecting URL '%s' to URL '%s'" % (self.request.url, url) );
          self.redirect(url, permanent=True);
       else:

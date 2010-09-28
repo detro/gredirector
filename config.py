@@ -17,6 +17,8 @@ ERROR_EMAIL_SENDER = '"Redirector (blog.ivandemarino.me)" <detronizator@gmail.co
 ERROR_EMAIL_SUBJECT = 'Redirect Script Error';
 ERROR_EMAIL_BODY = 'Unable to redirect this url: ';
 
+CHECK_URL_EXISTANCE = True;
+
 MEMCACHE_ACTIVE = True;
 MEMCACHE_EXPIRES_IN_SECONDS = 86400; # 1 day
 
