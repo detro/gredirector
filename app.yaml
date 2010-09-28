@@ -1,4 +1,4 @@
-application: gredirector-appengine
+application: redirector-blogivandemarinome
 version: master
 runtime: python
 api_version: 1
