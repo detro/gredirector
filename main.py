@@ -2,7 +2,6 @@
 # Author: Ivan De Marino - ivan.de.marino@gmail.com
 # Forked from: http://blog.dantup.com/2010/01/generic-redirection-script-for-google-app-engine
 
-import webob
 import urlparse
 import logging
 
@@ -20,7 +19,7 @@ def check_url_exists(url):
    # Search the Memcache
    memcachekey = "check_url_exists-" + url;
    result = memcache.get(memcachekey) if config.MEMCACHE_ACTIVE else None;
-   
+
    # Nothing in Memcache
    if ( result == None ):
       logging.debug("Existence of URL '%s' not in Memcache" % (url) );
@@ -36,10 +35,10 @@ def check_url_exists(url):
          # In case of InvalidURLError or DownloadError
          logging.error("Exception while Verifying URL '%s' existence" % (url));
          result = False;
-      
+
       # Store the result in Memcache for config.MEMCACHE_EXPIRES_IN_SECONDS
       memcache.set(memcachekey, result, time=config.MEMCACHE_EXPIRES_IN_SECONDS);
-   
+
    return result;
 
 
@@ -48,19 +47,19 @@ def get_redirect_url(url):
    # Search the Memcache
    memcachekey = "get_redirect_url-" + url;
    result = memcache.get(memcachekey) if config.MEMCACHE_ACTIVE else None;
-   
+
    # Nothing in Memcache
    if ( result == None ):
       logging.debug("Redirect for URL '%s' not in Memcache" % (url) );
       scheme, netloc, path, query, fragment = urlparse.urlsplit(url);
-	
+
       # Discard any port number from the hostname
       netloc = netloc.split(':', 1)[0];
-	
+
    	# Fix empty paths to be just '/' for consistency
       if path == '':
          path = '/';
-	
+
    	# Check if we have a mapping for this domain
       if netloc in config.URLS:
          # Grab the redirect info tuple
@@ -77,12 +76,12 @@ def get_redirect_url(url):
       else:
          logging.debug("No Mapping found for: " + url);
          result = None;
-   	
+
       # Store the result in Memcache for config.MEMCACHE_EXPIRES_IN_SECONDS
       memcache.set(memcachekey, result, time=config.MEMCACHE_EXPIRES_IN_SECONDS);
 
    return result;
-		
+
 
 # Main Request Handler
 class MainHandler(webapp.RequestHandler):
@@ -117,4 +116,4 @@ def main():
 if __name__ == "__main__":
    main();
 
-   
+
